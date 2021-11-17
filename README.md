@@ -31,6 +31,6 @@ cat /var/lib/jenkins/.ssh/github.pub
 cat /var/lib/jenkins/.ssh/github
 # add this to jenkins credentials
 ```
-- Now create a webhook in repo and in url : `<JENKINS-URL>/github-webhook/`
-- In jenkins job config choose github webhook polling.
+Now create a webhook in repo and in url : `<JENKINS-URL>/github-webhook/`
+In jenkins job config choose github webhook polling.
 
