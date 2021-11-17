@@ -6,7 +6,7 @@ pipeline {
     stages{
         stage('Build'){
             steps{
-                echo "Building..."
+                echo "Building... "
                 sh '''
                 docker build -t intern/php .
                 cd mysql
@@ -19,7 +19,7 @@ pipeline {
                 
                 echo "Removing last build..."
                 sh """
-                SUCCESS_BUILD=`wget -qO- http://<jenkins_url>:8080/job/jobname/lastSuccessfulBuild/buildNumber`
+                SUCCESS_BUILD=`wget -qO- http://<jenkins_url>:8080/job/docker%20%7E%20php+mysql/lastSuccessfulBuild/buildNumber`
                 docker rm -f "${SUCCESS_BUILD}mysql" && echo "container ${SUCCESS_BUILD}mysql removed" || echo "container ${SUCCESS_BUILD}mysql does not exist"
                 docker rm -f "${SUCCESS_BUILD}php" && echo "container ${SUCCESS_BUILD}php removed" || echo "container ${SUCCESS_BUILD}php does not exist"
                 """
