@@ -5,9 +5,9 @@ pipeline {
             steps{
                 echo "Building..."
                 sh '''
-                docker build -t its-ammu/php .
+                sudo docker build -t its-ammu/php .
                 cd mysql
-                docker build -t its-ammu/mysql .
+                sudo docker build -t its-ammu/mysql .
                 '''
                 
             }
