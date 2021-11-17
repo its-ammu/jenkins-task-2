@@ -5,7 +5,7 @@ pipeline {
             steps{
                 echo "Building..."
                 script{
-                    docker.build("sample:latest")
+                    sudo docker.build("sample:latest")
                 }
                 
             }
