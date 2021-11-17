@@ -4,15 +4,20 @@ pipeline {
         stage('Build'){
             steps{
                 echo "Building..."
-                script{
-                    sudo docker.build("sample:latest")
-                }
+                sh '''
+                docker build -t its-ammu/php .
+                cd mysql
+                docker build -t its-ammu/mysql .
+                '''
                 
             }
         }
         stage('Deploy'){
             steps{
                 echo "Deploying..."
+                withCredentials([string(credentialsId: 'mysql password', variable: 'MYSQL_PASS')]) {
+                    echo $MYSQL_PASS
+                }
             }
         }
     }
