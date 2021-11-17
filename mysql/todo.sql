@@ -1,0 +1,2 @@
+USE todo;
+CREATE TABLE tasks(id int NOT NULL AUTO_INCREMENT PRIMARY KEY,task varchar(255));
