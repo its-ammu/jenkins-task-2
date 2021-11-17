@@ -18,7 +18,10 @@ pipeline {
         stage('Deploy'){
             steps{
                 echo "Deploying..."
-                sh "echo $SECRET_PASS"
+                echo $SECRET_PASS
+                sh """
+                sudo docker run -d --network=host -e MYSQL_PASSWORD=$SECRET_PASS -e MYSQL_USER=intern -e MYSQL_ROOT_PASSWORD=$SECRET_PASS its-ammu/mysql
+                """
                 
             }
         }
