@@ -4,7 +4,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo "Building..."
-                def testImage = docker.build("sample:${env.BUILD_ID}")
+                docker.build("sample:${env.BUILD_ID}")
             }
         }
         stage('Deploy'){
