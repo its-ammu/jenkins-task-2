@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 echo "Deploying..."
-                echo SECRET_PASS
+                sh "echo $SECRET_PASS"
                 
             }
         }
