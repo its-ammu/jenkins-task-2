@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 
 $servername = "localhost";
 $username = "intern";
-$password = "internpass";
+$password = getenv('MYSQL_PASSWORD');
 $db = "todo";
 
 // Create connection
