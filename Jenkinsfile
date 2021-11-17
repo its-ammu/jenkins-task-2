@@ -4,7 +4,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo "Building..."
-                docker.build("sample:${env.BUILD_ID}")
+                docker.build sample
             }
         }
         stage('Deploy'){
