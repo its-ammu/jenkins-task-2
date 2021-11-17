@@ -8,9 +8,9 @@ pipeline {
             steps{
                 echo "Building..."
                 // sh '''
-                // sudo docker build -t its-ammu/php .
+                // docker build -t its-ammu/php .
                 // cd mysql
-                // sudo docker build -t its-ammu/mysql .
+                // docker build -t its-ammu/mysql .
                 // '''
                 
             }
@@ -20,7 +20,7 @@ pipeline {
                 echo "Deploying..."
                 
                 sh """
-                docker run --network=host -e MYSQL_PASSWORD=$SECRET_PASS -e MYSQL_USER=intern -e MYSQL_ROOT_PASSWORD=$SECRET_PASS its-ammu/mysql
+                docker run --network=host -e MYSQL_PASSWORD=$SECRET_PASS -e MYSQL_USER=intern its-ammu/mysql
                 """
                 
             }
