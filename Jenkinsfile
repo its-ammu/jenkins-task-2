@@ -16,7 +16,7 @@ pipeline {
             steps{
                 echo "Deploying..."
                 withCredentials([string(credentialsId: 'mysql password', variable: 'MYSQL_PASS')]) {
-                    echo $MYSQL_PASS
+                    echo MYSQL_PASS
                 }
             }
         }
