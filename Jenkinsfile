@@ -1,5 +1,5 @@
 pipeline {
-	agent any
+    agent any
     environment {
         SECRET_PASS = credentials('mysql password')
     }
@@ -7,20 +7,25 @@ pipeline {
         stage('Build'){
             steps{
                 echo "Building..."
-                // sh '''
-                // docker build -t its-ammu/php .
-                // cd mysql
-                // docker build -t its-ammu/mysql .
-                // '''
-                
+                sh '''
+                docker build -t itsammu/php .
+                cd mysql
+                docker build -t itsammu/mysql .
+                '''
             }
         }
         stage('Deploy'){
             steps{
-                echo "Deploying..."
+                echo "Removing last build..."
                 
                 sh """
-                docker run -d --network=host -e MYSQL_PASSWORD=$SECRET_PASS -e MYSQL_USER=intern -e MYSQL_ROOT_PASSWORD=$SECRET_PASS mysql
+                SUCCESS_BUILD=`wget -qO- http://<jenkins_url>:8080/job/jobname/lastSuccessfulBuild/buildNumber`
+                docker rm -f "${SUCCESS_BUILD}" && echo "container ${SUCCESS_BUILD} removed" || echo "container ${SUCCESS_BUILD} does not exist"
+                """
+                echo "Deploying new build..."
+                sh """
+                docker run -d --network=host -e MYSQL_PASSWORD=${SECRET_PASS} -e MYSQL_USER=intern -e MYSQL_ROOT_PASSWORD=${SECRET_PASS} -e MYSQL_DATABASE=todo --name "${BUILD_ID}mysql" itsammu/mysql
+                docker run -d -p 80:5000 -e MYSQL_PASSWORD=${SECRET_PASS} --name "${BUILD_ID}php" itsammu/php
                 """
                 
             }
