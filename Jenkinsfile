@@ -20,7 +20,7 @@ pipeline {
                 echo "Deploying..."
                 
                 sh """
-                docker run -d -e MYSQL_ROOT_PASSWORD=pass mysql
+                docker run -d --network=host -e MYSQL_PASSWORD=$SECRET_PASS -e MYSQL_USER=intern -e MYSQL_ROOT_PASSWORD=$SECRET_PASS mysql
                 """
                 
             }
