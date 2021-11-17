@@ -4,7 +4,10 @@ pipeline {
         stage('Build'){
             steps{
                 echo "Building..."
-                docker.build sample
+                script{
+                    docker.build("sample:latest")
+                }
+                
             }
         }
         stage('Deploy'){
